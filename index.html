@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"
+    integrity="sha512-N4kV7GkNv7QR7RX9YF/olywyIgIwNvfEe2nZtfyj73HdjCUkAfOBDbcuJ/cTaN04JKRnw1YG1wnUyNKMsNgg3g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts/flock.js"></script>
+    <script src="scripts/tree.js"></script>
+</head>
+<body>
+    <script>
+        let mainTree
+        let flocks = []
+
+        function setup() {
+            createCanvas(800 , 500)
+            mainTree = new tree(500, 150)
+        }
+
+        function draw() {
+            background(255,255,255)
+            printName()
+            translate(400, 0)
+            mainTree.printTree()
+            generateFlock()
+            flocks.forEach(element => element.dibujar())
+        }
+
+        function generateFlock() {
+            if (randomNM(0,10) < 0.5) {
+                flocks.push(c = new copo(randomNM(0,randomPosition()), Math.round(randomNM(1,5))))             
+            }
+        }
+
+        function randomNM(n, m) {
+            return Math.random()*(m-n)+n
+        }
+
+        function randomInvert() {
+            let decision = Math.random()
+            if (decision < 0.5) {
+                return (-1)
+            } else {
+                return (1)
+            }
+        }
+
+        function randomPosition() {
+            return randomInvert() * randomNM(0,400)
+        }
+
+        function printName() {
+            // textSize(32)
+            text('@mrtnmmn', 10, 10)
+        }
+
+    </script>
+</body>
+</html>
